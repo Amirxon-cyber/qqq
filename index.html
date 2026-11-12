@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="Честный гид по YouTube: как начать канал, выбрать оборудование, создавать Shorts и стримы, безопасно смотреть видео и считать своё экранное время.">
+    <meta name="description" content="An honest YouTube guide: start a channel, choose budget equipment, make Shorts and livestreams, stay safe, and track your watch time.">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Всё о YouTube — честный гид для зрителей и авторов">
-    <meta property="og:description" content="Практические советы, интерактивные калькуляторы и идеи для вашего YouTube-канала.">
+    <meta property="og:title" content="All About YouTube — A Practical Guide for Viewers and Creators">
+    <meta property="og:description" content="Practical tips, interactive calculators, and ideas for your YouTube channel.">
     <meta property="og:image" content="https://raw.githubusercontent.com/Amirxon-cyber/qqq/main/og-image.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Всё о YouTube — гид для зрителей и авторов">
+    <meta property="og:image:alt" content="All About YouTube — a guide for viewers and creators">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <title>Всё о YouTube — честный гид для зрителей и авторов</title>
+    <title>All About YouTube — A Practical Guide for Viewers and Creators</title>
     <style>
         :root {
             box-sizing: border-box;
@@ -156,6 +156,31 @@
             font-weight: 700;
         }
 
+        .links a,
+        .btn,
+        .ibtn,
+        .chip,
+        .opt,
+        .ch,
+        .card,
+        .stat,
+        .tl,
+        .way,
+        .step,
+        .panel,
+        .calc,
+        .col,
+        details,
+        .name-result,
+        .result {
+            transition: color .2s, background-color .2s, border-color .2s, box-shadow .2s, transform .2s, filter .2s;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+        }
+
         .ibtn {
             width: 40px;
             height: 40px;
@@ -167,6 +192,14 @@
             cursor: pointer;
             display: grid;
             place-items: center;
+        }
+
+        .language-select {
+            width: 76px;
+            padding: 0 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
         }
 
         .burger {
@@ -199,6 +232,31 @@
                 padding: 14px 20px;
                 border-top: 1px solid var(--line);
                 font-size: 16px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            nav {
+                gap: 8px;
+                padding-right: 12px;
+                padding-left: 12px;
+            }
+
+            .logo {
+                gap: 7px;
+                white-space: nowrap;
+            }
+
+            .logo span {
+                font-size: 14px;
+            }
+
+            .logo i {
+                width: 30px;
+            }
+
+            .language-select {
+                width: 62px;
             }
         }
 
@@ -271,6 +329,14 @@
 
         .btn:hover {
             filter: brightness(1.08);
+            transform: translateY(-2px);
+        }
+
+        .ibtn:hover,
+        .chip:hover,
+        .opt:hover:not(:disabled) {
+            border-color: var(--accent);
+            transform: translateY(-2px);
         }
 
         .table-wrap {
@@ -340,6 +406,21 @@
             border-radius: 14px;
             background: var(--bg);
             font-weight: 700;
+        }
+
+        .name-result:hover,
+        .stat:hover,
+        .tl:hover,
+        .way:hover,
+        .step:hover,
+        .panel:hover,
+        .calc:hover,
+        .col:hover,
+        details:hover,
+        .result:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow);
         }
 
         .time-calc {
@@ -445,9 +526,18 @@
         }
 
         .card .ico {
-            font-size: 30px;
-            display: block;
-            margin-bottom: 8px;
+            width: 58px;
+            height: 58px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: linear-gradient(145deg, var(--accent-soft), var(--surface));
+            box-shadow: 0 6px 16px rgba(20, 20, 40, .08);
+            display: grid;
+            place-items: center;
+            font-size: 29px;
+            margin-bottom: 14px;
+            transform: rotate(-4deg);
+            transition: transform .25s, box-shadow .25s;
         }
 
         .card h3 {
@@ -459,6 +549,11 @@
             margin: 0;
             color: var(--muted);
             font-size: 15px;
+        }
+
+        .card:hover .ico {
+            transform: rotate(0) scale(1.08);
+            box-shadow: var(--shadow);
         }
 
         .timeline {
@@ -694,6 +789,17 @@
             color: #fff;
         }
 
+        .channel-carousel {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding: 4px 2px 18px;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--line);
+        }
+
         .ch {
             display: flex;
             flex-direction: column;
@@ -705,6 +811,8 @@
             text-decoration: none;
             color: inherit;
             transition: transform 0.2s, border-color 0.2s;
+            flex: 0 0 clamp(235px, 30%, 310px);
+            scroll-snap-align: start;
         }
 
         .ch:hover {
@@ -721,12 +829,18 @@
         .ch .av {
             width: 46px;
             height: 46px;
-            border-radius: 14px;
-            background: var(--accent-soft);
+            border-radius: 16px;
+            background: linear-gradient(145deg, var(--accent-soft), var(--surface));
+            border: 1px solid var(--line);
             display: grid;
             place-items: center;
-            font-size: 24px;
+            font-size: 23px;
             flex: none;
+            transition: transform .2s;
+        }
+
+        .ch:hover .av {
+            transform: rotate(-8deg) scale(1.1);
         }
 
         .ch b {
@@ -766,6 +880,34 @@
 
         .searchrow {
             margin-top: 28px;
+        }
+
+        .channel-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .channel-toolbar .tabs {
+            margin-bottom: 10px;
+        }
+
+        .carousel-controls {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .carousel-controls .ibtn {
+            font-size: 24px;
+        }
+
+        .carousel-controls .ibtn:disabled {
+            opacity: .4;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .searchrow h3 {
@@ -961,7 +1103,11 @@
             <a href="#quiz">Квиз</a>
             <a href="#faq">Вопросы</a>
         </div>
-        <button class="ibtn" id="language" aria-label="Change language" title="Change language">UZ</button>
+        <select class="ibtn language-select" id="language" aria-label="Choose language" title="Choose language">
+            <option value="en">EN</option>
+            <option value="ru">RU</option>
+            <option value="uz">UZ</option>
+        </select>
         <button class="ibtn" id="theme" aria-label="Сменить тему">🌙</button>
         <button class="ibtn burger" id="burger" aria-label="Меню">☰</button>
     </nav>
@@ -1115,8 +1261,14 @@
             <p class="lead">Подборка известных каналов: полезные для учёбы и развлекательные для отдыха. Нажмите на
                 карточку,
                 и канал откроется на YouTube.</p>
-            <div class="tabs" id="tabs"></div>
-            <div class="grid" id="chgrid"></div>
+            <div class="channel-toolbar">
+                <div class="tabs" id="tabs"></div>
+                <div class="carousel-controls">
+                    <button class="ibtn" id="channels-prev" type="button" aria-label="Scroll channels left">‹</button>
+                    <button class="ibtn" id="channels-next" type="button" aria-label="Scroll channels right">›</button>
+                </div>
+            </div>
+            <div class="channel-carousel" id="chgrid" role="region" aria-roledescription="carousel" aria-label="Recommended YouTube channels"></div>
             <div class="searchrow">
                 <h3>Найти ролики по теме</h3>
                 <div class="ideas" id="searches"></div>
@@ -1558,7 +1710,251 @@
             'Описание и картинка для превью в Telegram и соцсетях': 'Telegram va ijtimoiy tarmoqlar uchun tavsif va muqova rasmi',
             'Тема': 'Mavzu'
         };
-        let currentLanguage = 'ru';
+        const englishTranslations = {
+            'Всё о YouTube': 'All About YouTube',
+            'YouTube:': 'YouTube:',
+            'Зачем': 'Why YouTube',
+            'История': 'History',
+            'Плюсы и минусы': 'Pros & Cons',
+            'Заработок': 'Earning',
+            'Каналы': 'Channels',
+            'Старт': 'Getting Started',
+            'Shorts и стримы': 'Shorts & Live',
+            'Безопасность': 'Safety',
+            'Сравнение': 'Compare',
+            'Квиз': 'Quiz',
+            'Вопросы': 'FAQ',
+            'Сменить тему': 'Change theme',
+            'Меню': 'Menu',
+            'Наверх': 'Back to top',
+            'Разбираемся честно': 'An honest guide',
+            'стоит ли': 'is it worth',
+            'заходить на платформу?': 'joining the platform?',
+            'Для чего он нужен, какие у него плюсы и минусы, можно ли на нём зарабатывать и какие каналы стоит посмотреть.': 'What it is for, its pros and cons, how creators can earn, and which channels are worth watching.',
+            'Посчитать доход': 'Estimate earnings',
+            'Что посмотреть': 'What to watch',
+            '2+ млрд': '2+ billion',
+            'зрителей в месяц': 'monthly viewers',
+            'стран': 'countries',
+            'год основания': 'founded',
+            'по популярности среди сайтов': 'among the most popular websites',
+            'Зачем нужен YouTube': 'What is YouTube for?',
+            'Это не только развлечения. Платформа стала местом, где учатся, работают и строят бренды.': 'It is more than entertainment. People learn, work, and build brands on the platform.',
+            'Учёба': 'Learning',
+            'Уроки по программированию, языкам и математике бесплатно и в любое время.': 'Free lessons in programming, languages, and math, available anytime.',
+            'Развлечения': 'Entertainment',
+            'Игры, музыка, юмор, фильмы и стримы на любой вкус.': 'Games, music, comedy, films, and livestreams for every taste.',
+            'Бизнес и бренд': 'Business & Branding',
+            'Компании и эксперты находят клиентов, показывая свою работу на видео.': 'Businesses and experts find customers by showcasing their work on video.',
+            'Новости и мнения': 'News & Opinions',
+            'Прямые эфиры и разборы событий от людей со всего мира.': 'Livestreams and commentary on events from people around the world.',
+            'Самовыражение': 'Self-Expression',
+            'Любой человек может показать творчество и найти свою аудиторию.': 'Anyone can share their creativity and find an audience.',
+            'Инструкции': 'How-To Guides',
+            'Как починить, собрать, приготовить или настроить: ответ почти всегда есть в видео.': 'Learn to fix, build, cook, or set things up—there is often a video to help.',
+            'Коротко об истории': 'A Brief History',
+            'Как платформа выросла из одного ролика про зоопарк.': 'How the platform grew from a single video at the zoo.',
+            '2005': '2005',
+            '2006': '2006',
+            '2007': '2007',
+            '2020': '2020',
+            '— основан YouTube, а первое видео «Me at the zoo» выложено в апреле.': '— YouTube was founded, and the first video, “Me at the zoo,” was uploaded in April.',
+            '— компанию покупает Google.': '— Google acquired the company.',
+            '— запускается партнёрская программа: авторы начинают получать деньги с рекламы.': '— The Partner Program launched, allowing creators to earn from ads.',
+            '— появляются короткие вертикальные видео Shorts.': '— YouTube Shorts, a short-form vertical video format, arrived.',
+            'Хорошая и плохая стороны': 'The Upsides and Downsides',
+            'У любой платформы есть две стороны. Лучше знать обе заранее.': 'Every platform has two sides. It helps to understand both.',
+            'Что хорошо': 'The Good',
+            'Что плохо': 'The Challenges',
+            'Огромный выбор бесплатного обучающего контента': 'A huge library of free educational content',
+            'Любой человек может стать автором без дорогого оборудования': 'Anyone can start creating without expensive gear',
+            'Видео находят через поиск годами, а не только в день выхода': 'Search can help people find videos long after they are published',
+            'Есть возможность заработка и личного бренда': 'Opportunities to earn and build a personal brand',
+            'Развиваются навыки: съёмка, монтаж, речь, дизайн': 'Build filming, editing, speaking, and design skills',
+            'Сильная конкуренция, новичка трудно заметить': 'Competition is high, so newcomers can be hard to discover',
+            'Много времени уходит на просмотр вместо дел': 'Watching can take time away from other activities',
+            'Реклама, кликбейт и недостоверная информация': 'Ads, clickbait, and misleading information',
+            'Автор зависит от алгоритмов и правил платформы': 'Creators depend on platform policies and recommendation systems',
+            'Рост канала идёт медленно, нужно терпение': 'Channels can grow slowly; patience matters',
+            'Можно ли заработать на YouTube?': 'Can you earn money on YouTube?',
+            'Да, но не сразу и не всем. Доход зависит от просмотров, тематики и аудитории.': 'Yes, but not immediately or for everyone. Earnings depend on views, the topic, and the audience.',
+            'Реклама на видео': 'Video ads',
+            'Партнёрская программа YouTube: нужны подписчики и часы просмотра. Условия и доступность зависят от страны, их стоит проверить в YouTube Studio.': 'YouTube Partner Program eligibility and availability depend on your country. Check the latest requirements in YouTube Studio.',
+            'Спонсорство и интеграции': 'Sponsorships & Integrations',
+            'Бренды платят за упоминание своего продукта в видео.': 'Brands may pay creators to feature their products in videos.',
+            'Партнёрские ссылки': 'Affiliate Links',
+            'Вы рекомендуете товар и получаете процент с покупок.': 'Recommend products and earn a commission on qualifying purchases.',
+            'Свои товары и услуги': 'Your Products & Services',
+            'Курсы, мерч, консультации: часто самый прибыльный способ.': 'Courses, merchandise, and consulting can become additional income streams.',
+            'Поддержка зрителей': 'Viewer Support',
+            'Донаты, платные подписки на канал и стримы.': 'Donations, paid channel memberships, and livestream support.',
+            'Калькулятор дохода': 'Earnings Calculator',
+            'Примерная оценка от рекламы, а не гарантия': 'A rough ad-revenue estimate, not a guarantee',
+            'Просмотров в месяц': 'Monthly views',
+            'Доход на 1000 просмотров': 'Earnings per 1,000 views',
+            'в месяц, а за год:': 'per month; per year:',
+            'Реальный доход сильно зависит от страны зрителей и темы канала. Образовательные и финансовые темы обычно платят больше игровых.': 'Actual earnings vary by audience location and channel topic. Rates can vary widely, and no topic guarantees a particular income.',
+            'Подборка известных каналов: полезные для учёбы и развлекательные для отдыха. Нажмите на карточку, и канал откроется на YouTube.': 'Explore popular channels for learning and entertainment. Select a card to open the channel on YouTube.',
+            'Найти ролики по теме': 'Find videos by topic',
+            'С чего начать': 'How to Get Started',
+            'Четыре простых шага, чтобы первое видео вышло уже на этой неделе.': 'Four simple steps to publish your first video this week.',
+            'Выберите тему': 'Choose a topic',
+            'То, что вам интересно и в чём вы можете разбираться долго.': 'Pick something you enjoy and want to keep learning about.',
+            'Снимите первое видео': 'Make your first video',
+            'Телефона и тихого места достаточно. Идеальное качество придёт потом.': 'A phone and a quiet place are enough to begin. Improve quality over time.',
+            'Оформите канал': 'Set up your channel',
+            'Название, аватар, обложки и понятное описание.': 'Choose a name, profile image, banner, and clear description.',
+            'Выпускайте регулярно': 'Publish consistently',
+            'Постоянство важнее удачи. Смотрите, что нравится зрителям.': 'Consistency matters more than luck. Learn what your viewers enjoy.',
+            'Подбор идеи для канала': 'Find a Channel Idea',
+            'Выберите, что вам ближе, и получите идею для старта.': 'Choose a topic you enjoy and get an idea to get started.',
+            'Чек-лист будущего ютубера': 'Creator Starter Checklist',
+            'Отмечайте выполненное и следите за прогрессом.': 'Check off tasks and track your progress.',
+            'готовности': 'complete',
+            'Мини-квиз': 'Quick Quiz',
+            'Проверьте, что вы запомнили.': 'See what you remember.',
+            'Частые вопросы': 'Frequently Asked Questions',
+            'Нужна ли дорогая камера?': 'Do I need an expensive camera?',
+            'Нет. Для начала хватит телефона, хорошего света и чистого звука. Звук для зрителя важнее картинки.': 'No. A phone, good lighting, and clear audio are enough to start. Viewers often notice sound before picture quality.',
+            'Сколько ждать результата?': 'How long does it take to see results?',
+            'Обычно первые месяцы просмотров почти нет. Рост чаще появляется после десятков роликов, поэтому нужны терпение и регулярность.': 'Views may be low in the first few months. Growth can take many videos, so patience and consistency help.',
+            'Можно ли без показа лица?': 'Can I make videos without showing my face?',
+            'Да. Многие каналы строятся на записи экрана, озвучке, анимации или обзорах без лица.': 'Yes. Many channels use screen recordings, voiceovers, animation, or faceless reviews.',
+            'Что с авторскими правами?': 'What about copyright?',
+            'Используйте свою музыку и видео либо материалы с разрешённой лицензией. Чужой контент без разрешения может привести к блокировке ролика.': 'Use your own media or material you have permission to use. Unauthorized content may result in a video being blocked.',
+            'Сайт сделан в учебных целях. Условия монетизации YouTube меняются, проверяйте их на официальной странице.': 'This site is for educational purposes. YouTube monetization requirements change; check the official guidelines.',
+            'Открыть канал →': 'Open channel →',
+            'Длинные бесплатные курсы по программированию, от HTML до Python.': 'Free, in-depth programming courses, from HTML to Python.',
+            'Быстрые и яркие разборы технологий и языков программирования.': 'Fast-paced, lively breakdowns of technology and programming languages.',
+            'Математика, объяснённая красивой анимацией.': 'Mathematics explained with beautiful animations.',
+            'Школьные и университетские предметы в понятных уроках.': 'Clear lessons for school and university subjects.',
+            'Короткие анимированные уроки на самые разные темы.': 'Short animated lessons on a wide range of topics.',
+            'Наука, космос и большие вопросы в стильной анимации.': 'Science, space, and big questions in polished animations.',
+            'Эксперименты и истории о том, как устроен мир.': 'Experiments and stories about how the world works.',
+            'Масштабные челленджи и конкурсы с огромными призами.': 'Large-scale challenges and competitions with major prizes.',
+            'Инженерные эксперименты и изобретения, которые приятно смотреть.': 'Fun-to-watch engineering experiments and inventions.',
+            'Необычные вопросы о мире, от которых захватывает дух.': 'Unexpected questions about the world that make you think.',
+            'Трюки, спорт и соревнования с друзьями.': 'Trick shots, sports, and friendly competitions.',
+            'Игры, мемы и юмор от одного из самых известных авторов.': 'Gaming, memes, and comedy from one of YouTube’s best-known creators.',
+            'Как начать канал на YouTube': 'How to start a YouTube channel',
+            'HTML и CSS для новичков': 'HTML and CSS for beginners',
+            'JavaScript с нуля': 'JavaScript for beginners',
+            'Монтаж видео для начинающих': 'Video editing for beginners',
+            'Как снимать на телефон': 'How to film with a phone',
+            'Смешные видео': 'Funny videos',
+            'Полезное': 'Educational',
+            'Развлечения': 'Entertainment',
+            'Все': 'All',
+            'Полезные': 'Educational',
+            'Развлекательные': 'Entertainment',
+            'Игры': 'Gaming',
+            'Программирование': 'Programming',
+            'Музыка': 'Music',
+            'Путешествия': 'Travel',
+            'Юмор': 'Comedy',
+            'Образование': 'Education',
+            'Прохождения и обзоры': 'Gameplay & Reviews',
+            'Снимайте прохождения любимых игр с живыми комментариями или делайте короткие обзоры новинок.': 'Record gameplay with live commentary or make quick reviews of new releases.',
+            'Уроки для новичков': 'Beginner-Friendly Tutorials',
+            'Разбирайте HTML, CSS и JavaScript на маленьких проектах и показывайте процесс с нуля.': 'Teach HTML, CSS, and JavaScript through small projects, from the ground up.',
+            'Каверы и разборы': 'Covers & Breakdowns',
+            'Играйте каверы, объясняйте аккорды или показывайте, как создаётся трек.': 'Play covers, teach chords, or show how a track comes together.',
+            'Влоги из городов': 'City Vlogs',
+            'Показывайте свой город глазами местного: еда, места и советы туристам.': 'Show your city through a local’s eyes: food, places, and travel tips.',
+            'Короткие скетчи': 'Short Sketches',
+            'Снимайте короткие сценки на телефон и выкладывайте их в Shorts.': 'Film quick skits on your phone and share them as Shorts.',
+            'Объясняю за минуту': 'Explained in a Minute',
+            'Простые объяснения сложных тем в формате короткого видео.': 'Break down complicated subjects in a short, simple video.',
+            'Выбрать тему канала': 'Choose a channel topic',
+            'Придумать название': 'Come up with a name',
+            'Сделать аватар и обложку': 'Create a profile image and banner',
+            'Снять первое видео': 'Film your first video',
+            'Записать чистый звук': 'Record clear audio',
+            'Придумать цепляющее название и превью': 'Create an engaging title and thumbnail',
+            'Выложить 5 видео': 'Publish five videos',
+            'В каком году основан YouTube?': 'What year was YouTube founded?',
+            'Как называется самое первое видео на YouTube?': 'What is the title of YouTube’s first video?',
+            'Какая компания купила YouTube в 2006 году?': 'Which company acquired YouTube in 2006?',
+            'Как называются короткие вертикальные видео на YouTube?': 'What are YouTube’s short vertical videos called?',
+            'Отлично, вы всё запомнили!': 'Great—you remembered everything!',
+            'Хороший результат, можно попробовать ещё раз.': 'Nice work! You can try again.',
+            'Пройти ещё раз': 'Try again',
+            'Вопрос': 'Question',
+            'из': 'of',
+            'Тема канала': 'Channel topic',
+            'Например, домашняя выпечка': 'For example, home baking',
+            'Придумать названия': 'Generate name ideas',
+            'Введите тему, чтобы получить идеи.': 'Enter a topic to get some ideas.',
+            'Введите тему': 'Enter a topic',
+            'Сколько времени уходит на YouTube?': 'How much time do you spend on YouTube?',
+            'Укажите среднее время просмотра в день — оценим неделю и год. Это ориентир, а не оценка того, «много» это или «мало».': 'Enter your average daily watch time to estimate your weekly and yearly total. It is an estimate, not a judgment.',
+            'Часов в день': 'Hours per day',
+            'за год': 'per year',
+            'Shorts и прямые эфиры': 'Shorts & Livestreams',
+            'Короткие ролики помогают быстро проверить идею, а стримы дают возможность общаться с аудиторией в реальном времени.': 'Short videos help you test an idea quickly, while livestreams let you connect with your audience in real time.',
+            'YouTube Shorts': 'YouTube Shorts',
+            'Вертикальное видео для одной чёткой мысли или истории. Начните с цепляющего первого кадра, снимайте с хорошим светом и субтитрами; не превращайте короткий формат в обманный кликбейт.': 'A vertical video built around one clear idea or story. Start with a strong opening, use good lighting and captions, and avoid misleading clickbait.',
+            'Стримы': 'Livestreams',
+            'Эфир подходит для вопросов и ответов, игр и совместной работы. Проверьте звук и интернет заранее, включите модерацию чата и не показывайте личные данные на экране.': 'Livestreams work well for Q&As, gaming, and collaboration. Check your audio and connection, moderate chat, and keep personal information off screen.',
+            'Выберите формат под задачу': 'Choose the Right Format',
+            'Shorts — для короткого открытия и знакомства; обычные видео — для подробного объяснения; эфиры — для диалога. Форматы можно сочетать, если это удобно автору и зрителям.': 'Use Shorts for a quick introduction, longer videos for detailed explanations, and livestreams for conversation. Mix formats when it works for you and your audience.',
+            'Бюджетный набор для старта': 'A Budget-Friendly Starter Kit',
+            'Не нужно покупать студию: сначала улучшайте то, что зритель замечает сильнее всего.': 'You do not need a studio. Start by improving the things viewers notice most.',
+            'Камера: ваш телефон': 'Camera: Your Phone',
+            'Снимайте на основную камеру, протрите объектив и закрепите телефон на устойчивой опоре. Стабильный кадр важнее дорогой камеры.': 'Use your phone’s main camera, clean the lens, and keep it steady. A stable shot matters more than an expensive camera.',
+            'Звук: простая петличка': 'Audio: A Basic Lavalier Mic',
+            'Проводной микрофон начального уровня или гарнитура часто дают заметный результат. Запишите тест и послушайте его в наушниках.': 'An entry-level wired microphone or headset can make a noticeable difference. Record a test and listen with headphones.',
+            'Свет: окно и отражатель': 'Lighting: A Window and Reflector',
+            'Встаньте лицом к окну. Белый лист или недорогой отражатель смягчит тени; избегайте яркого окна за спиной.': 'Face a window for soft light. A white sheet or an inexpensive reflector can soften shadows; avoid a bright window behind you.',
+            'Опора и тихое место': 'A Stable Setup and a Quiet Space',
+            'Книги могут заменить штатив, а мягкая мебель уменьшит эхо. Начните с того, что уже есть дома.': 'Books can stand in for a tripod, and soft furnishings can reduce echo. Start with what you already have.',
+            'Монтаж: бесплатные инструменты': 'Editing: Free Tools',
+            'Для первых роликов достаточно базовой обрезки, понятных титров и музыки с разрешённой лицензией.': 'For your first videos, basic cuts, clear captions, and properly licensed music are enough.',
+            'Безопасность детей и подростков': 'Safety for Kids and Teens',
+            'Общие советы не заменяют рекомендации семьи и официальные настройки платформы. Возрастные правила могут различаться по стране.': 'These general tips do not replace family guidance or the platform’s official settings. Age requirements can vary by country.',
+            'Полезные привычки': 'Helpful Habits',
+            'Обсуждайте с ребёнком настройки приватности и подходящий возрасту контент.': 'Talk with children about privacy settings and age-appropriate content.',
+            'Не публикуйте адрес, школу, расписание, геолокацию и другие личные данные.': 'Do not share an address, school, routine, location, or other personal information.',
+            'Используйте семейные инструменты контроля и проверяйте настройки вместе.': 'Use family safety tools and review settings together.',
+            'Блокируйте и сообщайте о травле, угрозах и нежелательных контактах.': 'Block and report bullying, threats, and unwanted contact.',
+            'Договаривайтесь о перерывах и времени без экрана без стыда и наказаний.': 'Agree on breaks and screen-free time without shame or punishment.',
+            'Если что-то тревожит': 'If Something Feels Wrong',
+            'Не отвечайте на подозрительные просьбы о фото, встрече или секретности.': 'Do not respond to suspicious requests for photos, a meeting, or secrecy.',
+            'Сохраните ссылку или доказательства и обратитесь к доверенному взрослому.': 'Save the link or evidence and talk to a trusted adult.',
+            'При непосредственной угрозе обратитесь в местные экстренные службы.': 'If there is immediate danger, contact your local emergency services.',
+            'Не полагайтесь только на алгоритмы рекомендаций или возрастную отметку.': 'Do not rely only on recommendations or age labels.',
+            'YouTube, TikTok и Instagram Reels': 'YouTube, TikTok & Instagram Reels',
+            'Функции и алгоритмы меняются; сравнение ниже — общий ориентир, а не гарантия охватов или дохода.': 'Features and algorithms change. This comparison is a general guide, not a promise of reach or earnings.',
+            'Критерий': 'Feature',
+            'Форматы': 'Formats',
+            'Короткие и длинные видео, эфиры': 'Shorts, long-form videos, and livestreams',
+            'В основном короткие видео, эфиры': 'Mostly short videos and livestreams',
+            'Короткие видео внутри соцсети': 'Short videos within a social network',
+            'Поиск и срок жизни': 'Search & Discoverability',
+            'Видео часто находят через поиск и позже': 'Videos can continue to appear in search over time',
+            'Рекомендации помогают открывать новые ролики': 'Recommendations help people discover new videos',
+            'Охват связан с рекомендациями и сообществом': 'Reach is tied to recommendations and community',
+            'Сильная сторона': 'Strength',
+            'Подробные темы и библиотека контента': 'In-depth topics and a content library',
+            'Быстрые тренды и короткие истории': 'Fast-moving trends and short stories',
+            'Визуальный контент и связь с подписчиками': 'Visual content and connections with followers',
+            'Подходит для': 'Best For',
+            'Обучения, обзоров, серий и стримов': 'Learning, reviews, series, and livestreams',
+            'Экспериментов с коротким форматом': 'Experimenting with short-form video',
+            'Коротких роликов и продвижения бренда': 'Short videos and brand promotion',
+            'Истории известных авторов': 'Stories from Well-Known Creators',
+            'Это примеры разных творческих путей, а не обещание повторить их результаты.': 'These are examples of different creative journeys, not promises of similar results.',
+            'Бывший инженер NASA, который стал известен научными и инженерными видео. Его путь показывает, как профессиональный опыт можно превратить в понятные зрителю эксперименты.': 'A former NASA engineer known for science and engineering videos. His work shows how professional expertise can become engaging, easy-to-follow experiments.',
+            'Создатель канала Grant Sanderson объясняет математику с помощью авторской анимации. Узнаваемый формат и ясная подача важнее дорогой студии.': 'Grant Sanderson explains mathematics through original animation. A distinctive format and clear storytelling can matter more than an expensive studio.',
+            'Известен крупными развлекательными проектами и конкурсами. Его масштаб — исключение, требующее команды и ресурсов, а не реалистичная стартовая планка для новичка.': 'Known for large-scale entertainment projects and competitions. That exceptional, resource-intensive scale is not a realistic starting benchmark for new creators.',
+            'Факты приведены как краткие биографические справки; число подписчиков, доход и популярность постоянно меняются и здесь не утверждаются.': 'These are brief biographical summaries. Subscriber counts, income, and popularity change over time and are not claimed here.',
+            'Генератор названия канала': 'Channel Name Generator',
+            'Введите тему — генератор предложит несколько отправных точек. Проверьте, свободно ли название, прежде чем использовать его.': 'Enter a topic to get a few name ideas. Check that a name is available before using it.',
+            'Название канала': 'Channel name',
+            'Описание и картинка для превью в Telegram и соцсетях': 'Description and preview image for Telegram and social media',
+            'Тема': 'Topic'
+        };
+        let currentLanguage = 'en';
         const originalTextNodes = new WeakMap();
 
         function translateTextNode(node) {
@@ -1566,7 +1962,11 @@
             const value = originalTextNodes.get(node);
             const text = value.trim().replace(/\s+/g, ' ');
             if (!text) return;
-            const translated = currentLanguage === 'uz' ? translations[text] || text : text;
+            const translated = currentLanguage === 'uz'
+                ? translations[text] || text
+                : currentLanguage === 'en'
+                    ? englishTranslations[text] || text
+                    : text;
             const currentText = node.nodeValue.trim().replace(/\s+/g, ' ');
             if (translated !== currentText) {
                 const leading = value.match(/^\s*/)[0];
@@ -1578,23 +1978,36 @@
         function translatePage() {
             const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
             while (walker.nextNode()) translateTextNode(walker.currentNode);
-            document.documentElement.lang = currentLanguage === 'uz' ? 'uz' : 'ru';
-            languageBtn.textContent = currentLanguage === 'uz' ? 'RU' : 'UZ';
-            languageBtn.setAttribute('aria-label', currentLanguage === 'uz' ? 'Tilni almashtirish' : 'Change language');
-            languageBtn.title = languageBtn.getAttribute('aria-label');
-            themeBtn.setAttribute('aria-label', currentLanguage === 'uz' ? 'Mavzuni almashtirish' : 'Сменить тему');
-            document.getElementById('burger').setAttribute('aria-label', currentLanguage === 'uz' ? 'Menyu' : 'Меню');
-            document.getElementById('back-to-top').title = currentLanguage === 'uz' ? 'Yuqoriga' : 'Наверх';
+            document.documentElement.lang = currentLanguage;
+            languageBtn.value = currentLanguage;
+            const languageLabel = currentLanguage === 'uz' ? 'Tilni tanlang' : currentLanguage === 'ru' ? 'Выберите язык' : 'Choose language';
+            languageBtn.setAttribute('aria-label', languageLabel);
+            languageBtn.title = languageLabel;
+            themeBtn.setAttribute('aria-label', currentLanguage === 'uz' ? 'Mavzuni almashtirish' : currentLanguage === 'ru' ? 'Сменить тему' : 'Change theme');
+            document.getElementById('burger').setAttribute('aria-label', currentLanguage === 'uz' ? 'Menyu' : currentLanguage === 'ru' ? 'Меню' : 'Menu');
+            const backToTopLabel = currentLanguage === 'uz' ? 'Yuqoriga' : currentLanguage === 'ru' ? 'Наверх' : 'Back to top';
+            document.getElementById('back-to-top').title = backToTopLabel;
             document.getElementById('back-to-top').setAttribute('aria-label', document.getElementById('back-to-top').title);
-            document.getElementById('channel-topic').placeholder = currentLanguage === 'uz' ? 'Masalan, uy sharoitida pishiriqlar' : 'Например, домашняя выпечка';
-            document.title = currentLanguage === 'uz' ? 'YouTube haqida — tomoshabinlar va mualliflar uchun xolis qo‘llanma' : 'Всё о YouTube — честный гид для зрителей и авторов';
+            document.getElementById('channels-prev').setAttribute('aria-label', currentLanguage === 'uz' ? 'Kanallarni chapga surish' : currentLanguage === 'ru' ? 'Прокрутить каналы влево' : 'Scroll channels left');
+            document.getElementById('channels-next').setAttribute('aria-label', currentLanguage === 'uz' ? 'Kanallarni o‘ngga surish' : currentLanguage === 'ru' ? 'Прокрутить каналы вправо' : 'Scroll channels right');
+            document.getElementById('channel-topic').placeholder = currentLanguage === 'uz' ? 'Masalan, uy sharoitida pishiriqlar' : currentLanguage === 'ru' ? 'Например, домашняя выпечка' : 'For example, home baking';
+            document.getElementById('chgrid').setAttribute('aria-label', currentLanguage === 'uz' ? 'Tavsiya etilgan YouTube kanallari' : currentLanguage === 'ru' ? 'Рекомендуемые каналы YouTube' : 'Recommended YouTube channels');
+            document.title = currentLanguage === 'uz'
+                ? 'YouTube haqida — tomoshabinlar va mualliflar uchun xolis qo‘llanma'
+                : currentLanguage === 'ru'
+                    ? 'Всё о YouTube — честный гид для зрителей и авторов'
+                    : 'All About YouTube — A Practical Guide for Viewers and Creators';
             document.querySelector('meta[name="description"]').content = currentLanguage === 'uz'
                 ? 'YouTube haqida xolis qo‘llanma: kanalni boshlash, jihoz tanlash, Shorts va jonli efirlar, xavfsizlik va ekran vaqtini hisoblash.'
-                : 'Честный гид по YouTube: как начать канал, выбрать оборудование, создавать Shorts и стримы, безопасно смотреть видео и считать своё экранное время.';
+                : currentLanguage === 'ru'
+                    ? 'Честный гид по YouTube: как начать канал, выбрать оборудование, создавать Shorts и стримы, безопасно смотреть видео и считать своё экранное время.'
+                    : 'An honest YouTube guide: start a channel, choose budget equipment, make Shorts and livestreams, stay safe, and track your watch time.';
             document.querySelector('meta[property="og:title"]').content = document.title;
             document.querySelector('meta[property="og:description"]').content = currentLanguage === 'uz'
                 ? 'Amaliy maslahatlar, interaktiv kalkulyatorlar va YouTube kanalingiz uchun g‘oyalar.'
-                : 'Практические советы, интерактивные калькуляторы и идеи для вашего YouTube-канала.';
+                : currentLanguage === 'ru'
+                    ? 'Практические советы, интерактивные калькуляторы и идеи для вашего YouTube-канала.'
+                    : 'Practical tips, interactive calculators, and ideas for your YouTube channel.';
         }
 
         function setLanguage(language) {
@@ -1608,10 +2021,10 @@
             if (typeof progress === 'function') progress();
             if (typeof renderSearches === 'function') renderSearches();
             if (typeof renderNames === 'function' && document.getElementById('channel-topic').value.trim()) renderNames();
-            try { localStorage.setItem('language', language); } catch (e) { }
+            try { localStorage.setItem('youtube-guide-language-v2', language); } catch (e) { }
         }
 
-        languageBtn.addEventListener('click', () => setLanguage(currentLanguage === 'ru' ? 'uz' : 'ru'));
+        languageBtn.addEventListener('change', () => setLanguage(languageBtn.value));
 
         const views = document.getElementById('views');
         const rpm = document.getElementById('rpm');
@@ -1637,19 +2050,25 @@
             if (!topic) {
                 const message = document.createElement('p');
                 message.className = 'note';
-                message.textContent = currentLanguage === 'uz' ? 'G‘oyalar olish uchun mavzuni kiriting.' : 'Введите тему, чтобы получить идеи.';
+                message.textContent = currentLanguage === 'uz'
+                    ? 'G‘oyalar olish uchun mavzuni kiriting.'
+                    : currentLanguage === 'ru'
+                        ? 'Введите тему, чтобы получить идеи.'
+                        : 'Enter a topic to get some ideas.';
                 nameResults.appendChild(message);
                 return;
             }
             const endings = currentLanguage === 'uz'
                 ? ['Studio', 'olami', 'kundaligi', 'oddiy tilda', 'Lab']
-                : ['Studio', 'Мир', 'Дневник', 'простыми словами', 'Lab'];
+                : currentLanguage === 'ru'
+                    ? ['Studio', 'Мир', 'Дневник', 'простыми словами', 'Lab']
+                    : ['Studio', 'World', 'Journal', 'Made Simple', 'Lab'];
             endings.forEach(ending => {
                 const item = document.createElement('div');
                 item.className = 'name-result';
-                item.textContent = ending === 'Мир' || ending === 'olami'
+                item.textContent = ending === 'Мир' || ending === 'olami' || ending === 'World'
                     ? `${topic} ${ending}`
-                    : ending === 'Дневник' || ending === 'kundaligi'
+                    : ending === 'Дневник' || ending === 'kundaligi' || ending === 'Journal'
                         ? `${topic}: ${ending}`
                         : `${topic} ${ending}`;
                 nameResults.appendChild(item);
@@ -1663,7 +2082,8 @@
         const dailyHours = document.getElementById('daily-hours');
         function calcWatchTime() {
             const hours = Math.min(24, Math.max(0, Number(dailyHours.value) || 0));
-            const formatHours = value => `${Number.isInteger(value) ? value : value.toFixed(1)} ${currentLanguage === 'uz' ? 'soat' : 'ч'}`;
+            const unit = currentLanguage === 'uz' ? 'soat' : currentLanguage === 'ru' ? 'ч' : 'h';
+            const formatHours = value => `${Number.isInteger(value) ? value : value.toFixed(1)} ${unit}`;
             document.getElementById('weekly-time').textContent = formatHours(hours * 7);
             document.getElementById('yearly-time').textContent = formatHours(hours * 365);
         }
@@ -1690,15 +2110,27 @@
         ];
         const tabNames = { all: 'Все', u: 'Полезные', e: 'Развлекательные' };
         const tabNamesUz = { all: 'Barchasi', u: 'Foydali', e: 'Ko‘ngilochar' };
+        const tabNamesEn = { all: 'All', u: 'Educational', e: 'Entertainment' };
         const tabs = document.getElementById('tabs');
         const chgrid = document.getElementById('chgrid');
+        const channelsPrev = document.getElementById('channels-prev');
+        const channelsNext = document.getElementById('channels-next');
         let activeChannelTab = 'all';
+
+        function updateCarouselControls() {
+            const maxScroll = chgrid.scrollWidth - chgrid.clientWidth;
+            channelsPrev.disabled = chgrid.scrollLeft <= 1;
+            channelsNext.disabled = chgrid.scrollLeft >= maxScroll - 1;
+        }
 
         function showChannels(k) {
             activeChannelTab = k;
             tabs.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c.dataset.k === k));
-            tabs.querySelectorAll('.chip').forEach(c => c.textContent = currentLanguage === 'uz' ? tabNamesUz[c.dataset.k] : tabNames[c.dataset.k]);
+            tabs.querySelectorAll('.chip').forEach(c => {
+                c.textContent = currentLanguage === 'uz' ? tabNamesUz[c.dataset.k] : currentLanguage === 'ru' ? tabNames[c.dataset.k] : tabNamesEn[c.dataset.k];
+            });
             chgrid.innerHTML = '';
+            chgrid.scrollLeft = 0;
             channels.filter(c => k === 'all' || c.t === k).forEach(c => {
                 const a = document.createElement('a');
                 a.className = 'ch';
@@ -1709,29 +2141,50 @@
                 a.querySelector('.av').textContent = c.e;
                 a.querySelector('b').textContent = c.n;
                 const tag = a.querySelector('.tag');
-                tag.textContent = currentLanguage === 'uz' ? (c.t === 'u' ? 'Foydali' : 'Ko‘ngilochar') : (c.t === 'u' ? 'Полезное' : 'Развлечения');
+                tag.textContent = currentLanguage === 'uz'
+                    ? (c.t === 'u' ? 'Foydali' : 'Ko‘ngilochar')
+                    : currentLanguage === 'ru'
+                        ? (c.t === 'u' ? 'Полезное' : 'Развлечения')
+                        : (c.t === 'u' ? 'Educational' : 'Entertainment');
                 tag.classList.add(c.t);
-                a.querySelector('p').textContent = currentLanguage === 'uz' ? translations[c.d] || c.d : c.d;
-                a.querySelector('.go').textContent = currentLanguage === 'uz' ? 'Kanalni ochish →' : 'Открыть канал →';
+                a.querySelector('p').textContent = currentLanguage === 'uz'
+                    ? translations[c.d] || c.d
+                    : currentLanguage === 'ru'
+                        ? c.d
+                        : englishTranslations[c.d] || c.d;
+                a.querySelector('.go').textContent = currentLanguage === 'uz'
+                    ? 'Kanalni ochish →'
+                    : currentLanguage === 'ru'
+                        ? 'Открыть канал →'
+                        : 'Open channel →';
                 chgrid.appendChild(a);
             });
+            requestAnimationFrame(updateCarouselControls);
         }
         Object.keys(tabNames).forEach(k => {
             const b = document.createElement('button');
             b.className = 'chip';
             b.dataset.k = k;
-            b.textContent = currentLanguage === 'uz' ? tabNamesUz[k] : tabNames[k];
+            b.textContent = currentLanguage === 'uz' ? tabNamesUz[k] : currentLanguage === 'ru' ? tabNames[k] : tabNamesEn[k];
             b.addEventListener('click', () => showChannels(k));
             tabs.appendChild(b);
         });
         showChannels('all');
+        chgrid.addEventListener('scroll', updateCarouselControls, { passive: true });
+        channelsPrev.addEventListener('click', () => chgrid.scrollBy({ left: -chgrid.clientWidth * .8, behavior: 'smooth' }));
+        channelsNext.addEventListener('click', () => chgrid.scrollBy({ left: chgrid.clientWidth * .8, behavior: 'smooth' }));
+        window.addEventListener('resize', updateCarouselControls);
 
         const searches = ['Как начать канал на YouTube', 'HTML и CSS для новичков', 'JavaScript с нуля', 'Монтаж видео для начинающих', 'Как снимать на телефон', 'Смешные видео'];
         const sbox = document.getElementById('searches');
         function renderSearches() {
             sbox.replaceChildren();
             searches.forEach(search => {
-                const term = currentLanguage === 'uz' ? translations[search] || search : search;
+                const term = currentLanguage === 'uz'
+                    ? translations[search] || search
+                    : currentLanguage === 'ru'
+                        ? search
+                        : englishTranslations[search] || search;
                 const a = document.createElement('a');
                 a.className = 'chip link';
                 a.href = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(term);
@@ -1752,6 +2205,7 @@
             'Образование': ['Объясняю за минуту', 'Простые объяснения сложных тем в формате короткого видео.']
         };
         const ideaNamesUz = { 'Игры': 'O‘yinlar', 'Программирование': 'Dasturlash', 'Музыка': 'Musiqa', 'Путешествия': 'Sayohat', 'Юмор': 'Hazil', 'Образование': 'Ta’lim' };
+        const ideaNamesEn = { 'Игры': 'Gaming', 'Программирование': 'Programming', 'Музыка': 'Music', 'Путешествия': 'Travel', 'Юмор': 'Comedy', 'Образование': 'Education' };
         const chips = document.getElementById('chips');
         const box = document.getElementById('idea');
         let activeIdea = 'Игры';
@@ -1759,17 +2213,25 @@
             activeIdea = name;
             chips.querySelectorAll('.chip').forEach(c => {
                 c.classList.toggle('on', c.dataset.idea === name);
-                c.textContent = currentLanguage === 'uz' ? ideaNamesUz[c.dataset.idea] : c.dataset.idea;
+                c.textContent = currentLanguage === 'uz' ? ideaNamesUz[c.dataset.idea] : currentLanguage === 'ru' ? c.dataset.idea : ideaNamesEn[c.dataset.idea];
             });
             box.innerHTML = '<h3></h3><p></p>';
-            box.querySelector('h3').textContent = currentLanguage === 'uz' ? translations[ideas[name][0]] || ideas[name][0] : ideas[name][0];
-            box.querySelector('p').textContent = currentLanguage === 'uz' ? translations[ideas[name][1]] || ideas[name][1] : ideas[name][1];
+            box.querySelector('h3').textContent = currentLanguage === 'uz'
+                ? translations[ideas[name][0]] || ideas[name][0]
+                : currentLanguage === 'ru'
+                    ? ideas[name][0]
+                    : englishTranslations[ideas[name][0]] || ideas[name][0];
+            box.querySelector('p').textContent = currentLanguage === 'uz'
+                ? translations[ideas[name][1]] || ideas[name][1]
+                : currentLanguage === 'ru'
+                    ? ideas[name][1]
+                    : englishTranslations[ideas[name][1]] || ideas[name][1];
         }
         Object.keys(ideas).forEach(name => {
             const b = document.createElement('button');
             b.className = 'chip';
             b.dataset.idea = name;
-            b.textContent = currentLanguage === 'uz' ? ideaNamesUz[name] : name;
+            b.textContent = currentLanguage === 'uz' ? ideaNamesUz[name] : currentLanguage === 'ru' ? name : ideaNamesEn[name];
             b.addEventListener('click', () => showIdea(name));
             chips.appendChild(b);
         });
@@ -1785,7 +2247,7 @@
             const p = Math.round((done / all.length) * 100);
             fill.style.width = p + '%';
             pct.textContent = p + '%';
-            pct.nextSibling.textContent = currentLanguage === 'uz' ? ' bajarildi' : ' готовности';
+            pct.nextSibling.textContent = currentLanguage === 'uz' ? ' bajarildi' : currentLanguage === 'ru' ? ' готовности' : ' complete';
         }
         tasks.forEach(t => {
             const l = document.createElement('label');
@@ -1807,29 +2269,45 @@
             'Microsoft': 'Microsoft', 'Apple': 'Apple', 'Google': 'Google',
             'Reels': 'Reels', 'Shorts': 'Shorts', 'Stories': 'Stories'
         };
+        const quizEn = {
+            '2003': '2003', '2005': '2005', '2010': '2010',
+            'Me at the zoo': 'Me at the zoo', 'Hello world': 'Hello world', 'My first day': 'My first day',
+            'Microsoft': 'Microsoft', 'Apple': 'Apple', 'Google': 'Google',
+            'Reels': 'Reels', 'Shorts': 'Shorts', 'Stories': 'Stories'
+        };
         const qbox = document.getElementById('quizBox');
         let qi = 0;
         let score = 0;
         function renderQ() {
             if (qi >= quiz.length) {
                 qbox.innerHTML = '<div class="final"><b></b><p></p><button class="btn">Пройти ещё раз</button></div>';
-                qbox.querySelector('b').textContent = currentLanguage === 'uz' ? `${score} / ${quiz.length}` : score + ' из ' + quiz.length;
+                qbox.querySelector('b').textContent = currentLanguage === 'uz' || currentLanguage === 'en'
+                    ? `${score} / ${quiz.length}`
+                    : score + ' из ' + quiz.length;
                 qbox.querySelector('p').textContent = score === quiz.length
-                    ? (currentLanguage === 'uz' ? 'Ajoyib, hammasini eslab qoldingiz!' : 'Отлично, вы всё запомнили!')
-                    : (currentLanguage === 'uz' ? 'Yaxshi natija, yana urinib ko‘rishingiz mumkin.' : 'Хороший результат, можно попробовать ещё раз.');
+                    ? (currentLanguage === 'uz' ? 'Ajoyib, hammasini eslab qoldingiz!' : currentLanguage === 'ru' ? 'Отлично, вы всё запомнили!' : 'Great—you remembered everything!')
+                    : (currentLanguage === 'uz' ? 'Yaxshi natija, yana urinib ko‘rishingiz mumkin.' : currentLanguage === 'ru' ? 'Хороший результат, можно попробовать ещё раз.' : 'Nice work! You can try again.');
                 qbox.querySelector('.btn').addEventListener('click', () => { qi = 0; score = 0; renderQ(); });
-                qbox.querySelector('.btn').textContent = currentLanguage === 'uz' ? 'Qayta boshlash' : 'Пройти ещё раз';
+                qbox.querySelector('.btn').textContent = currentLanguage === 'uz' ? 'Qayta boshlash' : currentLanguage === 'ru' ? 'Пройти ещё раз' : 'Try again';
                 return;
             }
             const cur = quiz[qi];
             qbox.innerHTML = '<div class="q"><div class="qmeta"></div><h3></h3><div class="opts"></div></div>';
-            qbox.querySelector('.qmeta').textContent = currentLanguage === 'uz' ? `Savol ${qi + 1} / ${quiz.length}` : 'Вопрос ' + (qi + 1) + ' из ' + quiz.length;
-            qbox.querySelector('h3').textContent = currentLanguage === 'uz' ? translations[cur.q] || cur.q : cur.q;
+            qbox.querySelector('.qmeta').textContent = currentLanguage === 'uz'
+                ? `Savol ${qi + 1} / ${quiz.length}`
+                : currentLanguage === 'ru'
+                    ? 'Вопрос ' + (qi + 1) + ' из ' + quiz.length
+                    : `Question ${qi + 1} of ${quiz.length}`;
+            qbox.querySelector('h3').textContent = currentLanguage === 'uz'
+                ? translations[cur.q] || cur.q
+                : currentLanguage === 'ru'
+                    ? cur.q
+                    : englishTranslations[cur.q] || cur.q;
             const opts = qbox.querySelector('.opts');
             cur.o.forEach((text, i) => {
                 const b = document.createElement('button');
                 b.className = 'opt';
-                b.textContent = currentLanguage === 'uz' ? quizUz[text] || text : text;
+                b.textContent = currentLanguage === 'uz' ? quizUz[text] || text : currentLanguage === 'ru' ? text : quizEn[text] || text;
                 b.addEventListener('click', () => {
                     opts.querySelectorAll('.opt').forEach((x, j) => {
                         x.disabled = true;
@@ -1870,9 +2348,9 @@
         updateScrollUI();
         backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        let savedLanguage = 'ru';
-        try { savedLanguage = localStorage.getItem('language') || 'ru'; } catch (e) { }
-        setLanguage(savedLanguage === 'uz' ? 'uz' : 'ru');
+        let savedLanguage = 'en';
+        try { savedLanguage = localStorage.getItem('youtube-guide-language-v2') || 'en'; } catch (e) { }
+        setLanguage(['en', 'ru', 'uz'].includes(savedLanguage) ? savedLanguage : 'en');
     </script>
 </body>
 

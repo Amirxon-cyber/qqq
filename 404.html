@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Страница не найдена. Вернитесь к гиду Всё о YouTube.">
+    <meta name="description" content="The page could not be found. Return to the All About YouTube guide.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <title>Страница не найдена — Всё о YouTube</title>
+    <title>Page Not Found — All About YouTube</title>
     <style>
         :root { color-scheme: light dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
         body { min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 24px; background: #f6f6f9; color: #17171b; }
@@ -13,35 +13,63 @@
         .code { margin: 0; color: #ff1f3d; font-size: clamp(72px, 18vw, 120px); font-weight: 850; line-height: 1; }
         h1 { margin: 18px 0 8px; }
         p { color: #62626d; }
-        a { display: inline-block; margin-top: 12px; padding: 12px 22px; border-radius: 999px; background: #ff1f3d; color: #fff; text-decoration: none; font-weight: 700; }
-        button { position: absolute; top: 20px; right: 20px; padding: 10px 14px; border: 1px solid #e4e4ec; border-radius: 12px; background: #fff; cursor: pointer; }
+        a { display: inline-block; margin-top: 12px; padding: 12px 22px; border-radius: 999px; background: #ff1f3d; color: #fff; text-decoration: none; font-weight: 700; transition: transform .2s, filter .2s; }
+        a:hover { transform: translateY(-2px); filter: brightness(1.08); }
+        select { position: absolute; top: 20px; right: 20px; padding: 10px 14px; border: 1px solid #e4e4ec; border-radius: 12px; background: #fff; cursor: pointer; font: inherit; }
+        :focus-visible { outline: 3px solid #ff1f3d; outline-offset: 3px; }
         @media (prefers-color-scheme: dark) {
             body { background: #0e0e11; color: #f3f3f6; }
-            main, button { background: #18181d; border-color: #2b2b33; }
+            main, select { background: #18181d; border-color: #2b2b33; color: #f3f3f6; }
             p { color: #a3a3b0; }
         }
     </style>
 </head>
 <body>
-    <button id="language" type="button" aria-label="Change language">UZ</button>
+    <select id="language" aria-label="Choose language">
+        <option value="en">EN</option>
+        <option value="ru">RU</option>
+        <option value="uz">UZ</option>
+    </select>
     <main>
         <p class="code">404</p>
-        <h1 id="heading">Страница не найдена</h1>
-        <p id="message">Возможно, ссылка устарела или адрес введён неверно.</p>
-        <a id="home" href="./">На главную</a>
+        <h1 id="heading">Page not found</h1>
+        <p id="message">The link may be outdated or the address may be incorrect.</p>
+        <a id="home" href="./">Back to home</a>
     </main>
     <script>
         const languageButton = document.getElementById('language');
-        let language = 'ru';
-        languageButton.addEventListener('click', () => {
-            language = language === 'ru' ? 'uz' : 'ru';
+        const messages = {
+            en: {
+                heading: 'Page not found',
+                message: 'The link may be outdated or the address may be incorrect.',
+                home: 'Back to home',
+                title: 'Page Not Found — All About YouTube',
+                label: 'Choose language'
+            },
+            ru: {
+                heading: 'Страница не найдена',
+                message: 'Возможно, ссылка устарела или адрес введён неверно.',
+                home: 'На главную',
+                title: 'Страница не найдена — Всё о YouTube',
+                label: 'Выберите язык'
+            },
+            uz: {
+                heading: 'Sahifa topilmadi',
+                message: 'Havola eskirgan yoki manzil noto‘g‘ri kiritilgan bo‘lishi mumkin.',
+                home: 'Bosh sahifa',
+                title: 'Sahifa topilmadi — YouTube haqida',
+                label: 'Tilni tanlang'
+            }
+        };
+        languageButton.addEventListener('change', () => {
+            const language = languageButton.value;
+            const copy = messages[language];
             document.documentElement.lang = language;
-            document.getElementById('heading').textContent = language === 'uz' ? 'Sahifa topilmadi' : 'Страница не найдена';
-            document.getElementById('message').textContent = language === 'uz' ? 'Havola eskirgan yoki manzil noto‘g‘ri kiritilgan bo‘lishi mumkin.' : 'Возможно, ссылка устарела или адрес введён неверно.';
-            document.getElementById('home').textContent = language === 'uz' ? 'Bosh sahifa' : 'На главную';
-            languageButton.textContent = language === 'uz' ? 'RU' : 'UZ';
-            languageButton.setAttribute('aria-label', language === 'uz' ? 'Tilni almashtirish' : 'Change language');
-            document.title = language === 'uz' ? 'Sahifa topilmadi — YouTube haqida' : 'Страница не найдена — Всё о YouTube';
+            document.getElementById('heading').textContent = copy.heading;
+            document.getElementById('message').textContent = copy.message;
+            document.getElementById('home').textContent = copy.home;
+            languageButton.setAttribute('aria-label', copy.label);
+            document.title = copy.title;
         });
     </script>
 </body>
